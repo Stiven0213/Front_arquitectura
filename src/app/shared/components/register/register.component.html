@@ -1,1 +1,160 @@
-<p>register works!</p>
+<body>
+    <div class="container">
+      <div class="img-logo p-3">
+        <img src="./assets/images/logoU.svg" style="width: 150px" />
+      </div>
+      <h1 class="text-center mb-4 color-u">Regístrate</h1>
+  
+      <form (ngSubmit)="signUp()" [formGroup]="registerForm">
+        <div class="row">
+          <div class="col-2 icons-u">
+            <img
+              src="./assets/icons/user.png"
+              alt="icono Usuario"
+              style="width: 40px"
+            />
+          </div>
+          <div class="col-10">
+            <div class="form-floating mb-2">
+              <input
+                type="text"
+                class="form-control"
+                name="userChat"
+                placeholder="name@example.com"
+                formControlName="userChat"
+                [ngClass]="{ 'is-invalid': submitted && formControlsValidate['userChat'].errors }"
+              />
+  
+              <div
+                *ngIf="submitted && formControlsValidate['userChat'].errors?.['required']"
+                class="invalid-feedback"
+              >
+                <div *ngIf="formControlsValidate['userChat'].errors?.['required']">
+                  Por favor, ingresa el nombre 
+                </div>
+              </div>
+  
+              <label for="floatingInput">Nombre </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+            <div class="col-2 icons-u">
+              <img
+                src="./assets/icons/user.png"
+                alt="icono Usuario"
+                style="width: 40px"
+              />
+            </div>
+            <div class="col-10">
+              <div class="form-floating mb-2">
+                <input
+                  type="text"
+                  class="form-control"
+                  name="userChat"
+                  placeholder="name@example.com"
+                  formControlName="userChat"
+                  [ngClass]="{ 'is-invalid': submitted && formControlsValidate['userChat'].errors }"
+                />
+    
+                <div
+                  *ngIf="submitted && formControlsValidate['userChat'].errors?.['required']"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="formControlsValidate['userChat'].errors?.['required']">
+                    Por favor, ingresa el apellido
+                  </div>
+                </div>
+    
+                <label for="floatingInput">Apellido</label>
+              </div>
+            </div>
+          </div>
+  
+        <div class="row">
+          <div class="col-2 icons-u">
+            <img
+              src="./assets/icons/mail.png"
+              alt="icono contraseña"
+              style="width: 40px"
+            />
+          </div>
+          <div class="col-10">
+            <div class="form-floating mb-2">
+              <input
+                type="email"
+                class="form-control"
+                name="password"
+                placeholder="name@example.com"
+                formControlName="email"
+                [ngClass]="{ 'is-invalid': submitted && formControlsValidate['email'].errors }"
+              />
+  
+              <div
+                *ngIf="submitted && formControlsValidate['email'].errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="formControlsValidate['email'].errors?.['required']">
+                  Por favor, ingresa un Email Válido
+                </div>
+              </div>
+  
+              <label for="floatingInput">Correo electrónico</label>
+            </div>
+          </div>
+        </div>
+  
+        <div class="row">
+          <div class="col-2 icons-u">
+            <img
+              src="./assets/icons/lock.png"
+              alt="icono contraseña"
+              style="width: 40px"
+            />
+          </div>
+          <div class="col-10">
+            <div class="form-floating mb-2">
+              <input
+                type="password"
+                class="form-control"
+                name="password"
+                placeholder="name@example.com"
+                formControlName="password"
+                [ngClass]="{ 'is-invalid': submitted && formControlsValidate['password'].errors }"
+              />
+  
+              <div
+                *ngIf="submitted && formControlsValidate['password'].errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="formControlsValidate['password'].errors?.['required']">
+                  Por favor, ingresa una contraseña de mínimo 8 caracteres
+                </div>
+              </div>
+  
+              <label for="floatingInput">Contraseña</label>
+            </div>
+          </div>
+        </div>
+  
+        <div class="div pt-4">
+          <button
+            type="submit"
+            class="btn mb-3"
+          >
+            Regístrate
+          </button>
+          <div class="mb-4 text-center">
+            ¿Ya estás registrado?
+            <b
+              ><a routerLink="/login" class="forgot-password-link color-u"
+                >Inicia sesión</a
+              ></b
+            >
+          </div>
+        </div>
+      </form>
+    </div>
+  </body>
+  
