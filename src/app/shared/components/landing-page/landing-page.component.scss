@@ -1,0 +1,124 @@
+body {
+    background-color: #f9f9f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+  .container {
+    max-width: 1300px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #172b58;
+  }
+  
+  body {
+    background-repeat: no-repeat;
+    background-image: url("https://www.ucaldas.edu.co/portal/wp-content/uploads/2023/06/Portada-80-anos.png");
+    background-size: cover;
+    background-position: center center;
+    width: 100%;
+    opacity: 1;
+    visibility: inherit;
+    z-index: 20;
+  }
+  
+  ////////////// parte derecha ///////////////////////////
+  
+  .container-2 {
+    position: relative;
+    width: 101%;
+    height: 550px;
+    display: flex;
+    background: #ffffff;
+    border-radius: 5px;
+  }
+  
+  .two-ways .col-left,
+  .two-ways .col-right {
+    padding: 30px;
+    display: flex;
+  }
+  
+  .two-ways .col-left {
+    width: 50%;
+    background: #172b58;
+    align-items: center;
+  }
+  
+  .two-ways .col-right {
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+  }
+  
+  .two-ways .sign-up-text {
+    position: relative;
+    color: #ffffff;
+  }
+  
+  .two-ways .sign-up-text h2 {
+    margin: 0 0 20px 0;
+    font-size: 30px;
+    font-weight: 700;
+  }
+  
+  .two-ways .sign-up-text p {
+    margin: 0 0 20px 0;
+    font-size: 19px;
+    font-weight: 500;
+    line-height: 25px;
+  }
+  
+  .two-ways .sign-up-text .btn {
+    padding: 7px 20px;
+    font-size: 16px;
+    letter-spacing: 1px;
+    color: #ffffff;
+    border: 1px solid #ffffff;
+    box-shadow: inset 0 0 0 0 #ffffff;
+    transition: 0.3s;
+    border-radius: 5px;
+  }
+  
+  .two-ways .sign-up-text .btn:hover {
+    color: #172b58;
+    box-shadow: inset 150px 0 0 0 #ffffff;
+  }
+  
+  .two-ways .login {
+    padding-right: 10px;
+  }
+  
+  .two-ways .login h2 {
+    margin: 0 0 20px 0;
+    font-size: 30px;
+    font-weight: 700;
+  }
+  
+  .two-ways .login p {
+    margin: 0 0 20px 0;
+    color: #172b58;
+    font-size: 19px;
+  }
+  
+  .two-ways .login .btn {
+    padding: 7px 20px;
+    font-size: 16px;
+    letter-spacing: 1px;
+    color: #172b58;
+    border: 1px solid #172b58;
+    box-shadow: inset 0 0 0 0 #172b58;
+    transition: 0.3s;
+    border-radius: 5px;
+  }
+  
+  .two-ways .login .btn:hover {
+    color: #ffffff;
+    box-shadow: inset 150px 0 0 0 #172b58;
+  }
+  
+  .no-p-r{
+    padding-right: 0;
+  }
