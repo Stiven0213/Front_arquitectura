@@ -1,1 +1,37 @@
-<p>main-view works!</p>
+<div class="container">
+  <div class="row">
+    <div class="col-3"></div>
+    <div class="col-6">
+      <div class="pt-5">
+        <h1 class="text-center p-4">Creación de asignaturas</h1>
+        <div class="mb-3 text-center">
+          <h3>Visualizador QR</h3>
+          <qrcode
+            [qrdata]="qrdata"
+            [width]="256"
+            [allowEmptyString]="true"
+          ></qrcode>
+        </div>
+        <div class="mb-3 pt-3">
+          <label for="exampleInputEmail1" class="form-label"
+            >Nombre asignatura</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            id="subject"
+            aria-describedby="subject"
+          />
+        </div>
+        <div class="mb-3 pt-3 pb-3">
+          <label for="exampleInputPassword1" class="form-label"
+            >Dirección del formulario</label
+          >
+          <input type="text" [(ngModel)]="qrdata" class="form-control" />
+        </div>
+        <button type="submit" class="btn btn-primary">Enviar</button>
+      </div>
+    </div>
+    <div class="col-3"></div>
+  </div>
+</div>

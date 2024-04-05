@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./main-view.component.scss']
 })
 export class MainViewComponent {
+qrdata: any;
 
 }

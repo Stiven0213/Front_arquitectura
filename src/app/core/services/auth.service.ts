@@ -12,7 +12,7 @@ export class AuthService {
   constructor( private http: HttpClient ) { }
 
   login(code: string, password: string): Observable<any> {
-    const params = new HttpParams().set('code', code).set('password', password);
-    return this.http.get(this.URL + '/login', { params });
+    const body = { code: code, password: password };
+    return this.http.post(this.URL + '/login', body);
   }
 }

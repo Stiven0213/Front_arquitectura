@@ -12,6 +12,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { RegisterComponent } from './shared/components/register/register.component';
 import { MainViewComponent } from './shared/components/main-view/main-view.component';
 
+import { QRCodeModule } from 'angularx-qrcode';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,7 +30,8 @@ import { MainViewComponent } from './shared/components/main-view/main-view.compo
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    QRCodeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

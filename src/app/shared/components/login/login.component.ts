@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder
   ) {
    // this.user = new User();
-   this.user = {};
+   this.user = {}
   }
 
   ngOnInit() {
@@ -64,7 +64,7 @@ export class LoginComponent implements OnInit {
         
         Swal.fire({
           title: "Error al ingresar",
-          text: "Verifica usuario o contraseña",
+          text: "Verifica usuario o password",
           icon: "error",
           showCancelButton: false,
           showCloseButton: true,
@@ -75,5 +75,6 @@ export class LoginComponent implements OnInit {
 
       }
     );
+    
    }
 }
