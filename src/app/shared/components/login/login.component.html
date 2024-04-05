@@ -21,18 +21,18 @@
                 class="form-control"
                 id="floatingInput"
                 placeholder="name@example.com"
-                name="userChat"
-                formControlName="userChat"
-                [ngClass]="{ 'is-invalid': submitted && formControlsValidate['userChat'].errors}"
+                name="code"
+                formControlName="code"
+                [ngClass]="{ 'is-invalid': submitted && formControlsValidate['code'].errors}"
               />
   
   
-              <div *ngIf="submitted && formControlsValidate['userChat'].errors?.['required']" class="invalid-feedback">
-                <div *ngIf="formControlsValidate['userChat'].errors?.['required']">Por favor, ingresa el nombre de usuario</div>
+              <div *ngIf="submitted && formControlsValidate['code'].errors?.['required']" class="invalid-feedback">
+                <div *ngIf="formControlsValidate['code'].errors?.['required']">Por favor, ingresa el código de profesor</div>
               </div>
   
   
-              <label for="floatingInput">Nombre de usuario</label>
+              <label for="floatingInput">Código de profesor</label>
             </div>
           </div>
         </div>
