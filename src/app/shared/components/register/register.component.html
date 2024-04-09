@@ -5,8 +5,8 @@
       </div>
       <h1 class="text-center mb-4 color-u">Regístrate</h1>
   
-      <form (ngSubmit)="signUp()" [formGroup]="registerForm">
-        <div class="row">
+      <form (ngSubmit)="register()" [formGroup]="registerForm">
+        <div class="row"> <!--Nombre-->
           <div class="col-2 icons-u">
             <img
               src="./assets/icons/user.png"
@@ -19,17 +19,17 @@
               <input
                 type="text"
                 class="form-control"
-                name="userChat"
-                placeholder="name@example.com"
-                formControlName="userChat"
-                [ngClass]="{ 'is-invalid': submitted && formControlsValidate['userChat'].errors }"
+                name="name"
+                placeholder="name"
+                formControlName="name"
+                [ngClass]="{ 'is-invalid': submitted && formControlsValidate['name'].errors }"
               />
   
               <div
-                *ngIf="submitted && formControlsValidate['userChat'].errors?.['required']"
+                *ngIf="submitted && formControlsValidate['name'].errors?.['required']"
                 class="invalid-feedback"
               >
-                <div *ngIf="formControlsValidate['userChat'].errors?.['required']">
+                <div *ngIf="formControlsValidate['name'].errors?.['required']">
                   Por favor, ingresa el nombre 
                 </div>
               </div>
@@ -39,7 +39,7 @@
           </div>
         </div>
 
-        <div class="row">
+        <div class="row"> <!--Apellido-->
             <div class="col-2 icons-u">
               <img
                 src="./assets/icons/user.png"
@@ -52,17 +52,17 @@
                 <input
                   type="text"
                   class="form-control"
-                  name="userChat"
-                  placeholder="name@example.com"
-                  formControlName="userChat"
-                  [ngClass]="{ 'is-invalid': submitted && formControlsValidate['userChat'].errors }"
+                  name="lastname"
+                  placeholder="lastname"
+                  formControlName="lastname"
+                  [ngClass]="{ 'is-invalid': submitted && formControlsValidate['lastname'].errors }"
                 />
     
                 <div
-                  *ngIf="submitted && formControlsValidate['userChat'].errors?.['required']"
+                  *ngIf="submitted && formControlsValidate['lastname'].errors?.['required']"
                   class="invalid-feedback"
                 >
-                  <div *ngIf="formControlsValidate['userChat'].errors?.['required']">
+                  <div *ngIf="formControlsValidate['lastname'].errors?.['required']">
                     Por favor, ingresa el apellido
                   </div>
                 </div>
@@ -72,7 +72,7 @@
             </div>
           </div>
   
-        <div class="row">
+        <div class="row"> <!--Email-->
           <div class="col-2 icons-u">
             <img
               src="./assets/icons/mail.png"
@@ -85,8 +85,8 @@
               <input
                 type="email"
                 class="form-control"
-                name="password"
-                placeholder="name@example.com"
+                name="email"
+                placeholder="email"
                 formControlName="email"
                 [ngClass]="{ 'is-invalid': submitted && formControlsValidate['email'].errors }"
               />
@@ -105,7 +105,7 @@
           </div>
         </div>
   
-        <div class="row">
+        <div class="row"> <!--Edad-->
           <div class="col-2 icons-u">
             <img
               src="./assets/icons/lock.png"
@@ -116,24 +116,57 @@
           <div class="col-10">
             <div class="form-floating mb-2">
               <input
-                type="password"
+                type="number"
                 class="form-control"
-                name="password"
-                placeholder="name@example.com"
-                formControlName="password"
-                [ngClass]="{ 'is-invalid': submitted && formControlsValidate['password'].errors }"
+                name="age"
+                placeholder="age"
+                formControlName="age"
+                [ngClass]="{ 'is-invalid': submitted && formControlsValidate['age'].errors }"
               />
   
               <div
-                *ngIf="submitted && formControlsValidate['password'].errors"
+                *ngIf="submitted && formControlsValidate['age'].errors"
                 class="invalid-feedback"
               >
-                <div *ngIf="formControlsValidate['password'].errors?.['required']">
-                  Por favor, ingresa una contraseña de mínimo 8 caracteres
+                <div *ngIf="formControlsValidate['age'].errors?.['age']">
+                  Por favor, ingresa una edad válida
                 </div>
               </div>
   
-              <label for="floatingInput">Contraseña</label>
+              <label for="floatingInput">Edad</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="row"> <!--Codigo_profesor-->
+          <div class="col-2 icons-u">
+            <img
+              src="./assets/icons/lock.png"
+              alt="icono contraseña"
+              style="width: 40px"
+            />
+          </div>
+          <div class="col-10">
+            <div class="form-floating mb-2">
+              <input
+                type="text"
+                class="form-control"
+                name="code_teacher"
+                placeholder="name@example.com"
+                formControlName="code_teacher"
+                [ngClass]="{ 'is-invalid': submitted && formControlsValidate['code_teacher'].errors }"
+              />
+  
+              <div
+                *ngIf="submitted && formControlsValidate['code_teacher'].errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="formControlsValidate['code_teacher'].errors?.['required']">
+                  Por favor, ingresa el código de profesor *PROF0..*
+                </div>
+              </div>
+  
+              <label for="floatingInput">Código de profesor</label>
             </div>
           </div>
         </div>

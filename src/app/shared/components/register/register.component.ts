@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-//import { AuthService } from 'src/app/core/services/auth.service';
+import { AuthService } from 'src/app/core/services/auth.service';
 //import { UserService } from 'src/app/core/services/user.service';
 //import { User } from '../../models/user.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -13,12 +13,12 @@ import Swal from 'sweetalert2';
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent implements OnInit {
-  //user: User;
+  user: any;
   registerForm!: FormGroup;
   submitted = false;
 
   constructor(
-    //private authService: AuthService,
+    private authService: AuthService,
     //private userService: UserService,
     private formBuilder: FormBuilder,
     private router: Router
@@ -27,10 +27,13 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.user = {};
     this.registerForm = this.formBuilder.group({
-      userChat: ['', [Validators.required, Validators.minLength(6)]],
+      name: ['', [Validators.required, Validators.minLength(4)]],
+      lastname: ['', [Validators.required, Validators.minLength(4)]],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(8)]],
+      age: ['', [Validators.required, Validators.maxLength(2)]],
+      code_teacher: ['', [Validators.required, Validators.minLength(7)]],
     });
   }
 
@@ -38,39 +41,39 @@ export class RegisterComponent implements OnInit {
     return this.registerForm.controls;
   }
 
-  signUp() {
-  //   this.submitted = true;
+  register() {
+    this.submitted = true;
 
-  //   if (this.registerForm.invalid) {
-  //     return;
-  //   }
+    if (this.registerForm.invalid) {
+      return;
+    }
 
-  //   this.user.userChat = this.registerForm.value.userChat;
-  //   this.user.email = this.registerForm.value.email;
-  //   this.user.password = this.registerForm.value.password;
+    this.user.name = this.registerForm.value.name;
+    this.user.lastname = this.registerForm.value.lastname;
+    this.user.email = this.registerForm.value.email;
+    this.user.age = this.registerForm.value.age;
+    this.user.code_teacher = this.registerForm.value.code_teacher;
 
-  //   this.authService.signUp(this.user).subscribe(
-  //     (response) => {
-  //       console.log('Usuario registrado con éxito', response);
+    this.authService.register(this.user).subscribe(
+      (response) => {
+        console.log('Usuario registrado con éxito', response);
 
-  //       Swal.fire({
-  //         title: "Usuario registrado",
-  //         text: "Serás redirigido al inicio de sesión",
-  //         icon: "success",
-  //         showCancelButton: false,
-  //         showCloseButton: true,
-  //         showConfirmButton: false,
-  //         timer: 4000,
-  //         timerProgressBar: true
-  //       });
-
-
-  //       this.userService.setUserData(response);
-  //       this.router.navigate(['/login']);
-  //     },
-  //     (error) => {
-  //       console.error('Error al registrar usuario', error);
-  //     }
-  //   );
+        Swal.fire({
+          title: "Usuario registrado",
+          text: "Serás redirigido al inicio de sesión",
+          icon: "success",
+          showCancelButton: false,
+          showCloseButton: true,
+          showConfirmButton: false,
+          timer: 4000,
+          timerProgressBar: true
+        });
+        //this.userService.setUserData(response);
+        this.router.navigate(['/login']);
+      },
+      (error) => {
+        console.error('Error al registrar usuario', error);
+      }
+    );
    }
 }
