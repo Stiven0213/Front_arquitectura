@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
-//import { UserService } from 'src/app/core/services/user.service';
-//import { User } from '../../models/user.model';
+import { User } from '../../models/user.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
-
 
 @Component({
   selector: 'app-register',
@@ -13,21 +11,17 @@ import Swal from 'sweetalert2';
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent implements OnInit {
-  user: any;
+  user: User = new User();
   registerForm!: FormGroup;
   submitted = false;
 
   constructor(
     private authService: AuthService,
-    //private userService: UserService,
     private formBuilder: FormBuilder,
     private router: Router
-  ) {
-   // this.user = new User();
-  }
+  ) {}
 
   ngOnInit() {
-    this.user = {};
     this.registerForm = this.formBuilder.group({
       name: ['', [Validators.required, Validators.minLength(4)]],
       lastname: ['', [Validators.required, Validators.minLength(4)]],
@@ -48,32 +42,33 @@ export class RegisterComponent implements OnInit {
       return;
     }
 
-    this.user.name = this.registerForm.value.name;
-    this.user.lastname = this.registerForm.value.lastname;
-    this.user.email = this.registerForm.value.email;
-    this.user.age = this.registerForm.value.age;
-    this.user.code_teacher = this.registerForm.value.code_teacher;
+    this.user = { ...this.registerForm.value };
 
     this.authService.register(this.user).subscribe(
       (response) => {
         console.log('Usuario registrado con éxito', response);
 
         Swal.fire({
-          title: "Usuario registrado",
-          text: "Serás redirigido al inicio de sesión",
-          icon: "success",
+          title: 'Usuario registrado',
+          text: 'Serás redirigido al inicio de sesión',
+          icon: 'success',
           showCancelButton: false,
           showCloseButton: true,
           showConfirmButton: false,
           timer: 4000,
-          timerProgressBar: true
+          timerProgressBar: true,
         });
-        //this.userService.setUserData(response);
+
         this.router.navigate(['/login']);
       },
       (error) => {
         console.error('Error al registrar usuario', error);
+        Swal.fire({
+          title: 'Error al registrar usuario',
+          text: 'Por favor, inténtalo de nuevo más tarde',
+          icon: 'error'
+        });
       }
     );
-   }
+  }
 }
