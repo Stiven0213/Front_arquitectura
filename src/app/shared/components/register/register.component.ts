@@ -35,7 +35,7 @@ export class RegisterComponent implements OnInit {
     return this.registerForm.controls;
   }
 
-  register() {
+  async register() {
     this.submitted = true;
 
     if (this.registerForm.invalid) {
@@ -44,31 +44,29 @@ export class RegisterComponent implements OnInit {
 
     this.user = { ...this.registerForm.value };
 
-    this.authService.register(this.user).subscribe(
-      (response) => {
-        console.log('Usuario registrado con éxito', response);
+    try {
+      const response = await this.authService.register(this.user);
+      console.log('Usuario registrado con éxito', response);
 
-        Swal.fire({
-          title: 'Usuario registrado',
-          text: 'Serás redirigido al inicio de sesión',
-          icon: 'success',
-          showCancelButton: false,
-          showCloseButton: true,
-          showConfirmButton: false,
-          timer: 4000,
-          timerProgressBar: true,
-        });
+      Swal.fire({
+        title: 'Usuario registrado',
+        text: 'Serás redirigido al inicio de sesión',
+        icon: 'success',
+        showCancelButton: false,
+        showCloseButton: true,
+        showConfirmButton: false,
+        timer: 4000,
+        timerProgressBar: true,
+      });
 
-        this.router.navigate(['/login']);
-      },
-      (error) => {
-        console.error('Error al registrar usuario', error);
-        Swal.fire({
-          title: 'Error al registrar usuario',
-          text: 'Por favor, inténtalo de nuevo más tarde',
-          icon: 'error'
-        });
-      }
-    );
+      this.router.navigate(['/login']);
+    } catch (error) {
+      console.error('Error al registrar usuario', error);
+      Swal.fire({
+        title: 'Error al registrar usuario',
+        text: 'Por favor, inténtalo de nuevo más tarde',
+        icon: 'error',
+      });
+    }
   }
 }

@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'platform',
 })
 export class SubjectService {
   private URL = 'http://localhost:5001/api/v1';

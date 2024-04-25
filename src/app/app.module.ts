@@ -1,19 +1,24 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+
+//Librerias terceros
+import { QRCodeModule } from 'angularx-qrcode';
+
+//Componentes propios
+import { RegisterComponent } from './shared/components/register/register.component';
+import { MainViewComponent } from './shared/components/main-view/main-view.component';
 import { LoginComponent } from './shared/components/login/login.component';
 import { LandingPageComponent } from './shared/components/landing-page/landing-page.component';
 import { NavbarComponent } from './shared/components/navbar/navbar.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
-import { RegisterComponent } from './shared/components/register/register.component';
-import { MainViewComponent } from './shared/components/main-view/main-view.component';
 
-import { QRCodeModule } from 'angularx-qrcode';
-
+//Servicios
+import { AuthService } from './core/services/auth.service';
+import { SubjectService } from './core/services/subject.service';
 
 @NgModule({
   declarations: [
@@ -23,7 +28,7 @@ import { QRCodeModule } from 'angularx-qrcode';
     NavbarComponent,
     FooterComponent,
     RegisterComponent,
-    MainViewComponent
+    MainViewComponent,
   ],
   imports: [
     BrowserModule,
@@ -31,9 +36,9 @@ import { QRCodeModule } from 'angularx-qrcode';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    QRCodeModule
+    QRCodeModule,
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [AuthService, SubjectService],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
