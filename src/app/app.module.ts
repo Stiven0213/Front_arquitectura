@@ -19,6 +19,7 @@ import { FooterComponent } from './shared/components/footer/footer.component';
 //Servicios
 import { AuthService } from './core/services/auth.service';
 import { SubjectService } from './core/services/subject.service';
+import { QrGeneratorComponent } from './shared/components/qr-generator/qr-generator.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { SubjectService } from './core/services/subject.service';
     FooterComponent,
     RegisterComponent,
     MainViewComponent,
+    QrGeneratorComponent,
   ],
   imports: [
     BrowserModule,
