@@ -138,38 +138,27 @@
           </div>
         </div>
 
-        <div class="row"> <!--Codigo_profesor-->
+        <div class="row">
+          <!-- Código Profesor -->
           <div class="col-2 icons-u">
-            <img
-              src="./assets/icons/lock.png"
-              alt="icono contraseña"
-              style="width: 40px"
-            />
+            <img src="./assets/icons/lock.png" alt="icono contraseña" style="width: 40px" />
           </div>
           <div class="col-10">
             <div class="form-floating mb-2">
-              <input
-                type="text"
-                class="form-control"
-                name="code_teacher"
-                placeholder="name@example.com"
-                formControlName="code_teacher"
-                [ngClass]="{ 'is-invalid': submitted && formControlsValidate['code_teacher'].errors }"
-              />
-  
-              <div
-                *ngIf="submitted && formControlsValidate['code_teacher'].errors"
-                class="invalid-feedback"
-              >
+              <select class="form-select" name="code_teacher" formControlName="code_teacher" [ngClass]="{ 'is-invalid': submitted && formControlsValidate['code_teacher'].errors }">
+                <option value="">Selecciona una asignatura</option>
+                <option *ngFor="let subject of subjects" [value]="subject.nombre">{{ subject.nombre }}</option>
+              </select>
+              <label for="floatingInput">Asignatura</label>
+              <div *ngIf="submitted && formControlsValidate['code_teacher'].errors" class="invalid-feedback">
                 <div *ngIf="formControlsValidate['code_teacher'].errors?.['required']">
-                  Por favor, ingresa el código de profesor *PROF0..*
+                  Por favor, selecciona una asignatura.
                 </div>
               </div>
-  
-              <label for="floatingInput">Código de profesor</label>
             </div>
           </div>
         </div>
+        
   
         <div class="div pt-4">
           <button
