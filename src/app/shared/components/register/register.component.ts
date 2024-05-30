@@ -52,15 +52,16 @@ export class RegisterComponent implements OnInit {
       this.authService.register(this.user).subscribe((response) => {
         console.log('Usuario registrado con éxito', response);
         console.log('Formulario válido, valores:', this.registerForm.value);
+
+        const accessCode = this.generateAccessCode(this.user.name, this.user.lastname, this.user.code_teacher);
   
         Swal.fire({
           title: 'Usuario registrado',
-          text: 'Serás redirigido al inicio de sesión',
+          html: `Tu código para ingresar es: <strong>${accessCode}</strong><br>Tu contraseña es: <strong>${this.user.name}${this.user.lastname}</strong><br>Esta información te llegará vía correo electrónico`,
           icon: 'success',
           showCancelButton: false,
           showCloseButton: true,
           showConfirmButton: false,
-          timer: 4000,
           timerProgressBar: true,
         });
   
@@ -74,6 +75,12 @@ export class RegisterComponent implements OnInit {
         icon: 'error',
       });
     }
+  }
+
+  generateAccessCode(firstName: string, lastName: string, codeTeacher: string): string {
+    const firstTwoLetters = firstName.substring(0, 2).toUpperCase();
+    const secondTwoLetters = lastName.substring(0, 2).toUpperCase();
+    return `${firstTwoLetters}${secondTwoLetters}${codeTeacher}`;
   }
   
 

@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/core/services/auth.service';
-//import { User } from '../../models/user.model';
-//import { UserService } from 'src/app/core/services/user.service';
+import { SharedDataService } from 'src/app/core/services/shared-data.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -12,19 +11,15 @@ import Swal from 'sweetalert2';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  user: any;
   loginForm!: FormGroup;
   submitted = false;
 
   constructor(
     private router: Router,
-    private authservice: AuthService,
-    //private userService: UserService,
-    private formBuilder: FormBuilder
-  ) {
-   // this.user = new User();
-   this.user = {}
-  }
+    private authService: AuthService,
+    private formBuilder: FormBuilder,
+    private sharedDataService: SharedDataService
+  ) {}
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
@@ -37,44 +32,37 @@ export class LoginComponent implements OnInit {
     return this.loginForm.controls;
   }
 
-   login() {
+  login() {
     this.submitted = true;
 
     if (this.loginForm.invalid) {
       return;
     }
 
-    this.user.code = this.loginForm.value.code;
-    this.user.password = this.loginForm.value.password;
+    const code = this.loginForm.value.code;
+    const password = this.loginForm.value.password;
 
-    this.authservice.login(this.user.code, this.user.password).subscribe(
+    this.authService.login(code, password).subscribe(
       (response) => {
-        console.log('inicio correcto');
-        console.log(response);
-
-        if (response) {
-          //this.authservice.setAuthenticationStatus(true);
+        if (response.teacherData) {
+          this.sharedDataService.setTeacherData(response.teacherData);
           this.router.navigate(['/mainView']);
-          //this.userService.setUserData(response);
-        } 
+        } else {
+          console.error('No se encontró teacherData en la respuesta del servidor');
+        }
       },
       (error) => {
-        console.log('Error');
-        console.log(error);
-        
         Swal.fire({
-          title: "Error al ingresar",
-          text: "Verifica usuario o password",
-          icon: "error",
+          title: 'Error al ingresar',
+          text: 'Verifica usuario o password',
+          icon: 'error',
           showCancelButton: false,
           showCloseButton: true,
           showConfirmButton: false,
           timer: 3000,
           timerProgressBar: true
         });
-
       }
     );
-    
-   }
+  }
 }

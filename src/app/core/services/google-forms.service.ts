@@ -10,7 +10,15 @@ export class GoogleFormsService {
 
   constructor(private http: HttpClient) {}
 
-  getAttendanceBySubject(subject: string): Observable<any[]> {
-    return this.http.get<any[]>(`${this.baseUrl}/attendance/${subject}`);
+  // getAttendanceBySubject(subject: string): Observable<any[]> {
+  //   return this.http.get<any[]>(
+  //     `${this.baseUrl}/attendance/${subject}`
+  //   );
+  // }
+
+    getAttendanceAndQR(teacherId: string): Observable<any> {
+    return this.http.get<any>(
+      `${this.baseUrl}/attendance/${teacherId}`
+    );
   }
 }

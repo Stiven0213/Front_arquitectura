@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GoogleFormsService } from 'src/app/core/services/google-forms.service';
+import { SharedDataService } from 'src/app/core/services/shared-data.service';
 
 @Component({
   selector: 'app-main-view',
@@ -7,19 +8,33 @@ import { GoogleFormsService } from 'src/app/core/services/google-forms.service';
   styleUrls: ['./main-view.component.scss'],
 })
 export class MainViewComponent implements OnInit {
-
   attendanceData: any[] = [];
+  teacherName: string = '';
+  qrCode: string = '';
 
-  constructor(private googleFormsService: GoogleFormsService){}
+  constructor(
+    private googleFormsService: GoogleFormsService,
+    private sharedDataService: SharedDataService
+  ) {}
 
   ngOnInit(): void {
-    this.getAttendance('calculo');
+    const teacherData = this.sharedDataService.getTeacherData();
+    if (teacherData) {
+      const teacherId = teacherData.codigo_profesor;
+      this.teacherName = teacherData.nombre; // Ajusta esto según la estructura de tu objeto teacherData
+      this.loadTeacherData(teacherId);
+      console.log(teacherData);
+    } else {
+      console.error('No se encontró la información del profesor en el servicio compartido');
+    }
   }
 
-  getAttendance(subject: string): void{
-    this.googleFormsService.getAttendanceBySubject(subject)
-    .subscribe(data => {
-      this.attendanceData = data;
-    })
+  loadTeacherData(teacherId: string): void {
+    this.googleFormsService.getAttendanceAndQR(teacherId)
+      .subscribe(data => {
+        this.attendanceData = data;
+        console.log(this.attendanceData)
+        this.qrCode = data.qrCode;
+      });
   }
 }
