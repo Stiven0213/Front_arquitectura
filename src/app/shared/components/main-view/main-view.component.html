@@ -67,11 +67,11 @@
               Cerrar sesion
             </button>
           </nav>
-          <main class="content" id="divMessage">
+          <main class="content section" id="divMessage">
             <div class="div-message div-message-bg">
               <div *ngFor="let pregunta of preguntas; let i = index">
                 <p class="question text-justify">{{ pregunta }}</p>
-                <p class="answer text-justify">{{ respuestas[i] }}</p>
+                <p class="answer text-justify" [innerHTML]= "respuestas[i]"></p>
               </div>
             </div>
 
@@ -84,15 +84,18 @@
                     [(ngModel)]="inputText"
                     placeholder="Escribe algo aquí..."
                     class="form-control no-radius"
+                    (keydown.enter)="generateText()"
                   />
                 </div>
                 <div class="col-1">
-                  <button class="btn2 bg-university no-radius" (click)="generateText()" [disabled]="isLoading">
-                    <i class="fa-solid fa-arrow-right fa-lg" *ngIf="!isLoading"></i>
-                    <div class="loader" *ngIf="isLoading"></div>
+                  <div *ngIf="showPreloader" class="preloader-container">
+                    <div class="preloader"></div>
+                  </div>
+                  <button [disabled]="showPreloader" class="btn2 bg-university no-radius" (click)="generateText()">
+                    <i class="fa-solid fa-arrow-right fa-lg" ></i>
+                    
                   </button>
                 </div>
-                <div class="col-1"></div>
               </div>
             </div>
           </main>

@@ -5,6 +5,8 @@ import { SubjectService } from 'src/app/core/services/subject.service';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { Router } from '@angular/router';
 import { GoogleGenerativeAI } from '@google/generative-ai';
+import { environment } from 'src/environments/environment';
+import { marked } from 'marked';
 
 @Component({
   selector: 'app-main-view',
@@ -17,14 +19,13 @@ export class MainViewComponent implements OnInit {
   qrCode: string = '';
   subjectName = '';
   teacherData: any = '';
-  isLoading = false;
+  showPreloader: boolean = false;
 
   //AI
 
   inputText: string = '';
   preguntas: string[] = [];
   respuestas: string[] = [];
-  API_KEY: string = 'AIzaSyAZvjMYGlM-JnhBCjp9o7wtM_n5H3xz2uY'; // Reemplaza con tu clave de API real
   genAI: any;
 
   constructor(
@@ -34,7 +35,7 @@ export class MainViewComponent implements OnInit {
     private authservice: AuthService,
     private router: Router
   ) {
-    this.genAI = new GoogleGenerativeAI(this.API_KEY);
+    this.genAI = new GoogleGenerativeAI(environment.geminiApiKey);
   }
 
   ngOnInit(): void {
@@ -79,27 +80,27 @@ export class MainViewComponent implements OnInit {
 
   async generateText() {
     const pregunta = this.inputText;
-    this.isLoading = true; // Mostrar loader mientras se carga la respuesta
+    this.showPreloader = true; 
   
     try {
       const model = this.genAI.getGenerativeModel({ model: "gemini-1.5-pro-latest" });
       const result = await model.generateContent(pregunta);
       const response = await result.response;
 
-      const formattedResponse = response.text()
-      .replace(/\*\*/g, '<strong>') // Reemplazar asteriscos dobles con <strong>
-      .replace(/<\/?[^>]+(>|$)/g, ''); // Eliminar cualquier otro tag HTML
+      const responseText = await response.text();
+
+      const formattedResponse = await marked.parse(responseText);
   
-      // Guardar pregunta y respuesta
+      
       this.preguntas.push(pregunta);
       this.respuestas.push(formattedResponse);
   
-      // Limpiar el campo de texto después de generar la pregunta y la respuesta
+      
       this.inputText = '';
     } catch (error) {
       console.error('Error al generar contenido:', error);
     } finally {
-      this.isLoading = false; // Ocultar loader cuando la respuesta se haya cargado
+      this.showPreloader = false; 
     }
   }
   

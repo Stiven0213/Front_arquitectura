@@ -21,6 +21,7 @@
     "@google/generative-ai": "^0.12.0",
     "angularx-qrcode": "^16.0.2",
     "html2canvas": "^1.4.1",
+    "marked": "^12.0.2",
     "rxjs": "~7.8.0",
     "sweetalert2": "^11.10.7",
     "tslib": "^2.3.0",
