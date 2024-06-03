@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { SubjectService } from 'src/app/core/services/subject.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-qr-generator',
@@ -23,6 +24,7 @@ export class QrGeneratorComponent {
     this.subjectService.getAllSubjects().subscribe(
       (data: any) => {
         this.subjects = data; // Suponiendo que los datos devueltos contienen un array con objetos que tienen las propiedades 'name' y 'qr'
+        console.log(data)
       },
       (error) => {
         console.error('Error al obtener las asignaturas:', error);
@@ -31,6 +33,20 @@ export class QrGeneratorComponent {
   }
 
   generateQRCode() {
+    if (!this.name || !this.address) {
+      Swal.fire({
+        title: 'Campos Incompletos',
+        text: 'Por favor completa todos los campos antes de generar el código QR.',
+        icon: 'error',
+        showCancelButton: false,
+        showCloseButton: true,
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true
+      });
+      return;
+    }
+
     const qrCodeDataUri = 'https://api.qrserver.com/v1/create-qr-code/?data=' + encodeURIComponent(this.address) + '&size=256x256';
     this.convertImageToBase64(qrCodeDataUri);
   }
@@ -56,6 +72,15 @@ export class QrGeneratorComponent {
   submitForm() {
     if (!this.qr) {
       console.error('Primero debes generar el código QR');
+      Swal.fire({
+        title: 'Primero genera el QR',
+        icon: 'error',
+        showCancelButton: false,
+        showCloseButton: true,
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true
+      });
       return;
     }
 
@@ -64,6 +89,21 @@ export class QrGeneratorComponent {
         console.log('Asignatura creada:', response);
         this.getSubjects()
         this.clearFields()
+        const Toast = Swal.mixin({
+          toast: true,
+          position: "top-end",
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.onmouseenter = Swal.stopTimer;
+            toast.onmouseleave = Swal.resumeTimer;
+          }
+        });
+        Toast.fire({
+          icon: "success",
+          title: "Asignatura creada correctamente"
+        });
       },
       (error) => {
         console.error('Error al crear asignatura:', error);
@@ -75,6 +115,27 @@ export class QrGeneratorComponent {
     this.name = '';
     this.address = '';
     this.qr = '';
+  }
+
+  deleteSubject(id_asignatura: number): void {
+    this.subjectService.deleteSubjectById(id_asignatura).subscribe(() => {
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.onmouseenter = Swal.stopTimer;
+          toast.onmouseleave = Swal.resumeTimer;
+        }
+      });
+      Toast.fire({
+        icon: "success",
+        title: "Asignatura eliminada correctamente"
+      });
+      this.getSubjects(); // Recargar la lista de asignaturas después de eliminar
+    });
   }
 
 }

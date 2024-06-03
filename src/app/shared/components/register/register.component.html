@@ -1,182 +1,162 @@
 <body>
-    <div class="container">
-      <div class="img-logo p-3">
-        <img src="./assets/images/logoU.svg" style="width: 150px" />
-      </div>
-      <h1 class="text-center mb-4 color-u">Regístrate</h1>
-  
-      <form (ngSubmit)="register()" [formGroup]="registerForm">
-        <div class="row"> <!--Nombre-->
-          <div class="col-2 icons-u">
-            <img
-              src="./assets/icons/user.png"
-              alt="icono Usuario"
-              style="width: 40px"
-            />
-          </div>
-          <div class="col-10">
-            <div class="form-floating mb-2">
-              <input
-                type="text"
-                class="form-control"
-                name="name"
-                placeholder="name"
-                formControlName="name"
-                [ngClass]="{ 'is-invalid': submitted && formControlsValidate['name'].errors }"
-              />
-  
-              <div
-                *ngIf="submitted && formControlsValidate['name'].errors?.['required']"
-                class="invalid-feedback"
-              >
-                <div *ngIf="formControlsValidate['name'].errors?.['required']">
-                  Por favor, ingresa el nombre 
-                </div>
-              </div>
-  
-              <label for="floatingInput">Nombre </label>
-            </div>
-          </div>
-        </div>
-
-        <div class="row"> <!--Apellido-->
-            <div class="col-2 icons-u">
-              <img
-                src="./assets/icons/user.png"
-                alt="icono Usuario"
-                style="width: 40px"
-              />
-            </div>
-            <div class="col-10">
-              <div class="form-floating mb-2">
-                <input
-                  type="text"
-                  class="form-control"
-                  name="lastname"
-                  placeholder="lastname"
-                  formControlName="lastname"
-                  [ngClass]="{ 'is-invalid': submitted && formControlsValidate['lastname'].errors }"
-                />
-    
-                <div
-                  *ngIf="submitted && formControlsValidate['lastname'].errors?.['required']"
-                  class="invalid-feedback"
-                >
-                  <div *ngIf="formControlsValidate['lastname'].errors?.['required']">
-                    Por favor, ingresa el apellido
-                  </div>
-                </div>
-    
-                <label for="floatingInput">Apellido</label>
-              </div>
-            </div>
-          </div>
-  
-        <div class="row"> <!--Email-->
-          <div class="col-2 icons-u">
-            <img
-              src="./assets/icons/mail.png"
-              alt="icono contraseña"
-              style="width: 40px"
-            />
-          </div>
-          <div class="col-10">
-            <div class="form-floating mb-2">
-              <input
-                type="email"
-                class="form-control"
-                name="email"
-                placeholder="email"
-                formControlName="email"
-                [ngClass]="{ 'is-invalid': submitted && formControlsValidate['email'].errors }"
-              />
-  
-              <div
-                *ngIf="submitted && formControlsValidate['email'].errors"
-                class="invalid-feedback"
-              >
-                <div *ngIf="formControlsValidate['email'].errors?.['required']">
-                  Por favor, ingresa un Email Válido
-                </div>
-              </div>
-  
-              <label for="floatingInput">Correo electrónico</label>
-            </div>
-          </div>
-        </div>
-  
-        <div class="row"> <!--Edad-->
-          <div class="col-2 icons-u">
-            <img
-              src="./assets/icons/lock.png"
-              alt="icono contraseña"
-              style="width: 40px"
-            />
-          </div>
-          <div class="col-10">
-            <div class="form-floating mb-2">
-              <input
-                type="number"
-                class="form-control"
-                name="age"
-                placeholder="age"
-                formControlName="age"
-                [ngClass]="{ 'is-invalid': submitted && formControlsValidate['age'].errors }"
-              />
-  
-              <div
-                *ngIf="submitted && formControlsValidate['age'].errors"
-                class="invalid-feedback"
-              >
-                <div *ngIf="formControlsValidate['age'].errors?.['age']">
-                  Por favor, ingresa una edad válida
-                </div>
-              </div>
-  
-              <label for="floatingInput">Edad</label>
-            </div>
-          </div>
-        </div>
-
-        <div class="row">
-          <!-- Código Profesor -->
-          <div class="col-2 icons-u">
-            <img src="./assets/icons/lock.png" alt="icono contraseña" style="width: 40px" />
-          </div>
-          <div class="col-10">
-            <div class="form-floating mb-2">
-              <select class="form-select" name="code_teacher" formControlName="code_teacher" [ngClass]="{ 'is-invalid': submitted && formControlsValidate['code_teacher'].errors }">
-                <option value="">Selecciona una asignatura</option>
-                <option *ngFor="let subject of subjects" [value]="subject.nombre">{{ subject.nombre }}</option>
-              </select>
-              <label for="floatingInput">Asignatura</label>
-              <div *ngIf="submitted && formControlsValidate['code_teacher'].errors" class="invalid-feedback">
-                <div *ngIf="formControlsValidate['code_teacher'].errors?.['required']">
-                  Por favor, selecciona una asignatura.
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-  
-        <div class="div pt-4">
-          <button
-            type="submit"
-            class="btn mb-3"
-          >
-            Regístrate
-          </button>
-          <div class="mb-4 text-center">
-            ¿Ya estás registrado?
-            <b
-              ><a routerLink="/login" class="forgot-password-link color-u"
-                >Inicia sesión</a
-              ></b
-            >
-          </div>
-        </div>
-      </form>
+  <div class="container">
+    <div class="img-logo p-3">
+      <img src="./assets/images/logoU.svg" style="width: 150px" />
     </div>
-  </body>
-  
+    <h1 class="text-center mb-4 color-u">Regístrate</h1>
+
+    <form (ngSubmit)="register()" [formGroup]="registerForm">
+      <div class="row">
+        <!--Nombre-->
+        <div class="col-6">
+          <div class="form-floating mb-2">
+            <input
+              type="text"
+              class="form-control"
+              name="name"
+              placeholder="name"
+              formControlName="name"
+              [ngClass]="{
+                'is-invalid': submitted && formControlsValidate['name'].errors
+              }"
+            />
+
+            <div
+              *ngIf="submitted && formControlsValidate['name'].errors?.['required']"
+              class="invalid-feedback"
+            >
+              <div *ngIf="formControlsValidate['name'].errors?.['required']">
+                Por favor, ingresa el nombre
+              </div>
+            </div>
+
+            <label for="floatingInput">Nombre </label>
+          </div>
+        </div>
+        <!--Apellido-->
+        <div class="col-6">
+          <div class="form-floating mb-2">
+            <input
+              type="text"
+              class="form-control"
+              name="lastname"
+              placeholder="lastname"
+              formControlName="lastname"
+              [ngClass]="{
+                'is-invalid':
+                  submitted && formControlsValidate['lastname'].errors
+              }"
+            />
+
+            <div
+              *ngIf="submitted && formControlsValidate['lastname'].errors?.['required']"
+              class="invalid-feedback"
+            >
+              <div
+                *ngIf="formControlsValidate['lastname'].errors?.['required']"
+              >
+                Por favor, ingresa el apellido
+              </div>
+            </div>
+
+            <label for="floatingInput">Apellido</label>
+          </div>
+        </div>
+      </div>
+
+      <!--Email-->
+
+      <div class="form-floating mb-2">
+        <input
+          type="email"
+          class="form-control"
+          name="email"
+          placeholder="email"
+          formControlName="email"
+          [ngClass]="{
+            'is-invalid': submitted && formControlsValidate['email'].errors
+          }"
+        />
+
+        <div
+          *ngIf="submitted && formControlsValidate['email'].errors"
+          class="invalid-feedback"
+        >
+          <div *ngIf="formControlsValidate['email'].errors?.['required']">
+            Por favor, ingresa un Email Válido
+          </div>
+        </div>
+
+        <label for="floatingInput">Correo electrónico</label>
+      </div>
+
+      <!--Edad-->
+
+      <div class="form-floating mb-2">
+        <input
+          type="number"
+          class="form-control"
+          name="age"
+          placeholder="age"
+          formControlName="age"
+          [ngClass]="{
+            'is-invalid': submitted && formControlsValidate['age'].errors
+          }"
+        />
+
+        <div
+          *ngIf="submitted && formControlsValidate['age'].errors"
+          class="invalid-feedback"
+        >
+          <div *ngIf="formControlsValidate['age'].errors?.['age']">
+            Por favor, ingresa una edad válida
+          </div>
+        </div>
+
+        <label for="floatingInput">Edad</label>
+      </div>
+
+      <!-- Código Profesor -->
+
+      <div class="form-floating mb-2">
+        <select
+          class="form-select"
+          name="code_teacher"
+          formControlName="code_teacher"
+          [ngClass]="{
+            'is-invalid':
+              submitted && formControlsValidate['code_teacher'].errors
+          }"
+        >
+          <option value="">Selecciona una asignatura</option>
+          <option *ngFor="let subject of subjects" [value]="subject.nombre">
+            {{ subject.nombre }}
+          </option>
+        </select>
+        <label for="floatingInput">Asignatura</label>
+        <div
+          *ngIf="submitted && formControlsValidate['code_teacher'].errors"
+          class="invalid-feedback"
+        >
+          <div
+            *ngIf="formControlsValidate['code_teacher'].errors?.['required']"
+          >
+            Por favor, selecciona una asignatura.
+          </div>
+        </div>
+      </div>
+
+      <div class="div pt-4">
+        <button type="submit" class="btn mb-3">Regístrate</button>
+        <div class="mb-4 text-center">
+          ¿Ya estás registrado?
+          <b
+            ><a routerLink="/login" class="forgot-password-link color-u"
+              >Inicia sesión</a
+            ></b
+          >
+        </div>
+      </div>
+    </form>
+  </div>
+</body>

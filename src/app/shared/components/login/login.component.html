@@ -1,86 +1,72 @@
 <body>
-    <div class="container">
-      <div class="img-logo p-3">
-        <img src="./assets/images/logoU.svg" style="width: 150px" />
-      </div>
-      <h1 class="text-center mb-4 color-u">Iniciar sesión</h1>
-  
-      <form (ngSubmit)="login()" [formGroup]="loginForm">
-        <div class="row">
-          <div class="col-2 icons-u">
-            <img
-              src="./assets/icons/user.png"
-              alt="icono Usuario"
-              style="width: 40px"
-            />
-          </div>
-          <div class="col-10">
-            <div class="form-floating mb-3">
-              <input
-                type="text"
-                class="form-control"
-                id="floatingInput"
-                placeholder="name@example.com"
-                name="code"
-                formControlName="code"
-                [ngClass]="{ 'is-invalid': submitted && formControlsValidate['code'].errors}"
-              />
-  
-  
-              <div *ngIf="submitted && formControlsValidate['code'].errors?.['required']" class="invalid-feedback">
-                <div *ngIf="formControlsValidate['code'].errors?.['required']">Por favor, ingresa el código de profesor</div>
-              </div>
-  
-  
-              <label for="floatingInput">Código de profesor</label>
-            </div>
-          </div>
-        </div>
-  
-        <div class="row">
-          <div class="col-2 icons-u">
-            <img
-              src="./assets/icons/lock.png"
-              alt="icono password"
-              style="width: 40px"
-            />
-          </div>
-          <div class="col-10">
-            <div class="form-floating mb-3">
-              <input
-                type="password"
-                class="form-control"
-                id="floatingInput"
-                placeholder="name@example.com"
-                name="password"            
-                formControlName="password"
-                [ngClass]="{ 'is-invalid': submitted && formControlsValidate['password'].errors}"
-              />
-  
-  
-              <div *ngIf="submitted && formControlsValidate['password'].errors" class="invalid-feedback">
-                <div *ngIf="formControlsValidate['password'].errors?.['required']">La password es obligatoria</div>
-              </div>
-  
-  
-              <label for="floatingInput">Contraseña</label>
-            </div>
-          </div>
-        </div>
-  
-        <div class="div pt-4">
-          <button
-            type="submit"
-            class=" btn mb-3"
-          >
-            Iniciar sesión
-          </button>
-          <div class="mb-4 text-center">
-            ¿No estás registrado?
-            <b><a routerLink="/register" class="forgot-password-link color-u">Regístrate</a></b>
-          </div>
-        </div>
-      </form>
+  <div class="container">
+    <div class="img-logo p-3">
+      <img src="./assets/images/logoU.svg" style="width: 150px" />
     </div>
-  </body>
-  
+    <h1 class="text-center mb-4 color-u">Iniciar sesión</h1>
+
+    <form (ngSubmit)="login()" [formGroup]="loginForm">
+      <div class="form-floating mb-3">
+        <input
+          type="text"
+          class="form-control"
+          id="floatingInput"
+          placeholder="name@example.com"
+          name="code"
+          formControlName="code"
+          [ngClass]="{
+            'is-invalid': submitted && formControlsValidate['code'].errors
+          }"
+        />
+
+        <div
+          *ngIf="submitted && formControlsValidate['code'].errors?.['required']"
+          class="invalid-feedback"
+        >
+          <div *ngIf="formControlsValidate['code'].errors?.['required']">
+            Por favor, ingresa el código de profesor
+          </div>
+        </div>
+
+        <label for="floatingInput">Código de profesor</label>
+      </div>
+
+      <div class="form-floating mb-3">
+        <input
+          type="password"
+          class="form-control"
+          id="floatingInput"
+          placeholder="name@example.com"
+          name="password"
+          formControlName="password"
+          [ngClass]="{
+            'is-invalid': submitted && formControlsValidate['password'].errors
+          }"
+        />
+
+        <div
+          *ngIf="submitted && formControlsValidate['password'].errors"
+          class="invalid-feedback"
+        >
+          <div *ngIf="formControlsValidate['password'].errors?.['required']">
+            La password es obligatoria
+          </div>
+        </div>
+
+        <label for="floatingInput">Contraseña</label>
+      </div>
+
+      <div class="div pt-4">
+        <button type="submit" class="btn mb-3">Iniciar sesión</button>
+        <div class="mb-4 text-center">
+          ¿No estás registrado?
+          <b
+            ><a routerLink="/register" class="forgot-password-link color-u"
+              >Regístrate</a
+            ></b
+          >
+        </div>
+      </div>
+    </form>
+  </div>
+</body>

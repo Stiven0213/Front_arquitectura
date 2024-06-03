@@ -30,7 +30,7 @@ import { QrGeneratorComponent } from './shared/components/qr-generator/qr-genera
     FooterComponent,
     RegisterComponent,
     MainViewComponent,
-    QrGeneratorComponent,
+    QrGeneratorComponent
   ],
   imports: [
     BrowserModule,

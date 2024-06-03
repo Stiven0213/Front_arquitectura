@@ -1,20 +1,38 @@
 <body>
   <div class="container-fluid">
-    <div class="row" style="height: 100vh;">
-      <div class="col-3 d-flex flex-column full-height">
-        <div class="half-height" style="border-bottom: 1px solid black;">
-            codigo QR
+    <div class="row" style="height: 100vh">
+      <div class="col-3 d-flex flex-column full-height shadow">
+        <div
+          class="half-height d-flex flex-column justify-content-center align-items-center"
+        >
+          <div class="pb-3 text-center fs-5 color-u">
+            Escanea este código para ser dirigido al formulario de asistencia
+          </div>
+          <img
+            [src]="qrCode"
+            alt="QR Code"
+            style="max-width: 400px"
+            class="img-fluid pt-3"
+          />
         </div>
-        <div class="half-height">
-            <h2 class="text-center">Asistencia de Cálculo</h2>
+        <div class="pt-3">
+          <div class="d-flex justify-content-around align-items-center p-2">
+            <div class="text-center fs-5">Asistencia de {{ subjectName }}</div>
+            <button
+              class="btn2 bg-university no-radius"
+              (click)="refreshAttendanceData()"
+            >
+              Refrescar
+            </button>
+          </div>
 
-            <table class="table">
+          <div style="overflow-y: scroll; height: 50vh" class="section">
+            <table class="table fs-6 text-center">
               <thead>
                 <tr>
                   <th>Nombre</th>
                   <th>Apellido</th>
-                  <th>Correo Electrónico</th>
-    
+                  <th>Código</th>
                 </tr>
               </thead>
               <tbody>
@@ -22,27 +40,39 @@
                   <td>{{ student.nombre }}</td>
                   <td>{{ student.apellido }}</td>
                   <td>{{ student.correo_electronico }}</td>
-    
                 </tr>
               </tbody>
             </table>
+          </div>
         </div>
-
       </div>
 
-      <div class="col-9" style="border: 1px solid rgb(187, 187, 187);">
+      <div class="col-9">
         <div class="main">
-            <nav class="navbar px-3 border-bottom">
-                <!-- Btn -->
-                <button class="btn no-radius" type="button" >
-                  Bienvenido profesor X
-                </button>
+          <nav class="navbar px-3 border-bottom">
+            <!-- profe -->
+            <div class="fs-4 color-u">
+              Bienvenido profesor <strong>{{ teacherData.nombreProfe }}</strong>
+            </div>
 
-                <button class="btn d-none d-md-block" >Cerrar sesion</button>
-              </nav>
+            <img
+              src="./../../../../assets/icons/codigo-qr.png"
+              alt=""
+              width="30px"
+              style="cursor: pointer"
+              routerLink="/qrGenerator"
+            />
+
+            <button class="btn d-none d-md-block" (click)="logout()">
+              Cerrar sesion
+            </button>
+          </nav>
           <main class="content" id="divMessage">
             <div class="div-message div-message-bg">
-              <div></div>
+              <div *ngFor="let pregunta of preguntas; let i = index">
+                <p class="question text-justify">{{ pregunta }}</p>
+                <p class="answer text-justify">{{ respuestas[i] }}</p>
+              </div>
             </div>
 
             <div class="div-question pt-3 px-3">
@@ -51,13 +81,15 @@
                 <div class="col-9">
                   <input
                     type="text"
-                    id="pregunta"
+                    [(ngModel)]="inputText"
+                    placeholder="Escribe algo aquí..."
                     class="form-control no-radius"
                   />
                 </div>
                 <div class="col-1">
-                  <button class="btn2 bg-university no-radius">
-                    <i class="fa-solid fa-arrow-right fa-lg"></i>
+                  <button class="btn2 bg-university no-radius" (click)="generateText()" [disabled]="isLoading">
+                    <i class="fa-solid fa-arrow-right fa-lg" *ngIf="!isLoading"></i>
+                    <div class="loader" *ngIf="isLoading"></div>
                   </button>
                 </div>
                 <div class="col-1"></div>

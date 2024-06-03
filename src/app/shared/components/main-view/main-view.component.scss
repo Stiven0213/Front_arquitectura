@@ -1,10 +1,25 @@
 body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin: 0;
-  padding: 0;
-  overflow: hidden;
+  
   background-repeat: no-repeat;
-  background-position: center bottom;
+  background-image: url("https://www.ucaldas.edu.co/portal/wp-content/uploads/2023/06/Portada-80-anos.png");
   background-size: cover;
+  background-position: center center;
+
+  opacity: 1;
+  visibility: inherit;
+  z-index: 20;
+}
+
+
+.container-fluid {
+
+  background-color: white;
+  max-width: 95%;
+  height: 95%;
 }
 
 h3 {
@@ -90,8 +105,8 @@ li {
 
 .div-message {
   height: 80vh;
-  overflow-y: scroll;
   overflow-x: hidden;
+  overflow-y: scroll;
 }
 
 .div-message-bg {
@@ -168,9 +183,6 @@ li {
   box-shadow: inset 150px 0 0 0 #ffffff;
 }
 
-tr {
-  cursor: pointer;
-}
 
 // .no-radius {
 //   border-radius: 0 !important;
@@ -208,8 +220,58 @@ tr {
 }
 
 .full-height {
-  height: 100%;
+  height: 100vh;
 }
 .half-height {
-  height: 50%;
+  height: 50vh;
+}
+
+.fs-6 {
+  font-size: 0.85rem !important;
+}
+
+.section {
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  scrollbar-color: #172b58 #e4e4e4;
+  scrollbar-width:thin;
+}
+
+.section::-webkit-scrollbar {
+  width: 20px;
+  border-radius: 8px;
+}
+
+
+.section::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+}
+
+.section::-webkit-scrollbar-thumb {
+  background-color: darkgray;
+  border-radius: 6px;
+  border: 3px solid lightgray;
+}
+
+
+
+//////////
+
+.loader {
+  border: 4px solid rgb(255, 255, 255);
+  border-left-color: #3498db;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  animation: spin 1s linear infinite;
+  margin: 0 auto;
+  display: inline-block; /* Mostrar el loader como un bloque en línea */
+  vertical-align: middle; /* Alinear verticalmente con el botón */
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }

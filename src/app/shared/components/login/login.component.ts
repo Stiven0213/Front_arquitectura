@@ -45,10 +45,13 @@ export class LoginComponent implements OnInit {
     this.authService.login(code, password).subscribe(
       (response) => {
         if (response.teacherData) {
+          this.authService.setAuthenticationStatus(true);
           this.sharedDataService.setTeacherData(response.teacherData);
           this.router.navigate(['/mainView']);
         } else {
-          console.error('No se encontró teacherData en la respuesta del servidor');
+          console.error(
+            'No se encontró teacherData en la respuesta del servidor'
+          );
         }
       },
       (error) => {
@@ -60,7 +63,7 @@ export class LoginComponent implements OnInit {
           showCloseButton: true,
           showConfirmButton: false,
           timer: 3000,
-          timerProgressBar: true
+          timerProgressBar: true,
         });
       }
     );

@@ -8,6 +8,7 @@ import { User } from 'src/app/shared/models/user.model';
 })
 export class AuthService {
   private URL = 'http://localhost:5001/api/v1';
+  private isAuthenticated = false;
 
   constructor(private http: HttpClient) {}
 
@@ -16,18 +17,21 @@ export class AuthService {
     return this.http.post(this.URL + '/login', body);
   }
 
-  // register(
-  //   name: string,
-  //   lastname: string,
-  //   email: string,
-  //   age: number,
-  //   code_teacher: string
-  // ) {
-  //   const body = { name, lastname, email, age, code_teacher };
-  //   return this.http.post(this.URL + '/register', body);
-  // }
-
   register(user:User) {
     return this.http.post(this.URL + '/register', user);
   }
+  
+  logout(): void {
+    this.isAuthenticated = false;
+  }
+
+  setAuthenticationStatus(status: boolean): void {
+    this.isAuthenticated = status;
+  }
+
+  isAuthenticatedUser(): boolean {
+    return this.isAuthenticated;
+  }
+
+
 }

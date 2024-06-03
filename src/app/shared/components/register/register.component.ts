@@ -53,7 +53,8 @@ export class RegisterComponent implements OnInit {
         console.log('Usuario registrado con éxito', response);
         console.log('Formulario válido, valores:', this.registerForm.value);
 
-        const accessCode = this.generateAccessCode(this.user.name, this.user.lastname, this.user.code_teacher);
+        const ageAsString = this.user.age.toString();
+        const accessCode = this.generateAccessCode(this.user.name, this.user.lastname, ageAsString);
   
         Swal.fire({
           title: 'Usuario registrado',

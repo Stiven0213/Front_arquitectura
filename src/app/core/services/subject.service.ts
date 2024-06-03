@@ -19,4 +19,12 @@ export class SubjectService {
     const body = { name: name, qr: qr };
     return this.http.post(`${this.URL}/subjects`, body);
   }
+
+  getSubjectByName(name: string): Observable<any> {
+    return this.http.get(`${this.URL}/subjects/name/${name}`);
+  }
+
+  deleteSubjectById(id_asignatura: number){
+    return this.http.delete(`${this.URL}/subjects/${id_asignatura}`);
+  }
 }
